@@ -1,0 +1,23 @@
+PocketPixel 1.0.1 diagnostic report
+Unity: 6000.4.0f1
+URP: 17.4.0
+Build target: StandaloneWindows64
+Graphics API: Direct3D12
+Color space: Linear
+Pipeline type: UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
+Quality index: 1
+Shader found: True
+Shader supported: True
+Shader has errors: False
+Loaded filter objects: 1
+Active winning filter: True
+Priority: 0
+Scene preview: True
+Pixel height: 193
+Outline: True / width 0.5
+Loaded renderer features: 2
+Feature: active=True, shaderAssigned=True
+Feature: active=True, shaderAssigned=True
+This report omits file paths, object names, usernames and full console logs. Review before sharing.
+
+Installer checks: 2 renderers; repeated install does not add features.

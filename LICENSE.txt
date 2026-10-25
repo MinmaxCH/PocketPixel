@@ -1,0 +1,41 @@
+PocketPixel Attribution License 1.0
+Copyright (c) 2026 minmax.ch
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to
+do so, subject to the following conditions:
+
+1. The above copyright notice and this entire license, including its
+   attribution requirement and disclaimer, must be included in all copies
+   or substantial portions of the Software.
+
+2. Any publicly distributed game, application, asset, or other product
+   incorporating the Software or a substantial portion of it, including
+   modified versions, must include the following legible attribution in
+   its end-user credits or acknowledgments:
+
+       PocketPixel - minmax.ch
+
+   If the product has no credits section, include the attribution in an
+   accessible About screen or accompanying end-user documentation.
+   A source-code comment alone does not satisfy this requirement for a
+   distributed executable. Attribution does not imply endorsement.
+   Private use and unpublished development do not require public credits.
+
+3. Recipients may choose additional terms for their own contributions or
+   products, but those terms must not remove the obligations above for
+   the incorporated Software. Publishing modified source code is optional.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+This is a custom permissive license with a product-credit requirement.
+It is not the unmodified MIT License and no OSI approval is claimed.
+Unity and other third-party components remain subject to their own licenses.

@@ -1,0 +1,12 @@
+{
+  "enabledChangesImage": true,
+  "disabledExactlyMatchesOriginal": true,
+  "componentDisabledExactlyMatchesOriginal": true,
+  "GruenDifferentFromWarm": true,
+  "EisblauDifferentFromWarm": true,
+  "ViolettDifferentFromWarm": true,
+  "SchwarzweissDifferentFromWarm": true,
+  "deletedExactlyMatchesOriginal": true,
+  "noActiveFilterAfterDeletion": true,
+  "shaderHasErrors": false
+}
