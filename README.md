@@ -4,6 +4,24 @@ Globaler Vierfarben-Pixelfilter für Unity 6 / Universal Render Pipeline.
 Entwickelt und geprüft mit Unity 6000.4.0f1 und URP 17.4.0, Universal Renderer.
 Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Versionen sind nicht geprüft.
 
+## Vorschauen
+
+| Warmgelb | Eisblau |
+| --- | --- |
+| ![PocketPixel – Warmgelb](Previews/01-Warmgelb.png) | ![PocketPixel – Eisblau](Previews/Eisblau.png) |
+| Grün | Schwarzweiss |
+| ![PocketPixel – Grün](Previews/Gruen.png) | ![PocketPixel – Schwarzweiss](Previews/Schwarzweiss.png) |
+| Violett | |
+| ![PocketPixel – Violett](Previews/Violett.png) | |
+
+## Download
+
+**[PocketPixel 1.0.1 für Unity herunterladen (.unitypackage)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.1.unitypackage)**
+
+[Komplettpaket mit Quellcode, Vorschauen und Dokumentation herunterladen (.zip)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.1-komplett.zip)
+
+Das Repository ist privat; für den Download ist ein GitHub-Konto mit Zugriff erforderlich.
+
 ## Installation in ein neues Projekt
 
 1. Universal-3D-Projekt (URP) öffnen.
