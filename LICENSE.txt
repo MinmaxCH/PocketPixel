@@ -1,5 +1,5 @@
 PocketPixel Attribution License 1.0
-Copyright (c) 2026 minmax.ch
+Copyright (c) 2026 Minmax
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to
@@ -16,7 +16,7 @@ do so, subject to the following conditions:
    modified versions, must include the following legible attribution in
    its end-user credits or acknowledgments:
 
-       PocketPixel - minmax.ch
+       PocketPixel - Minmax.ch
 
    If the product has no credits section, include the attribution in an
    accessible About screen or accompanying end-user documentation.
