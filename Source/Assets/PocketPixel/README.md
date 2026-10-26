@@ -1,70 +1,95 @@
 # PocketPixel 1.0.1
 
-Globaler Vierfarben-Pixelfilter für Unity 6 / Universal Render Pipeline.
-Entwickelt und geprüft mit Unity 6000.4.0f1 und URP 17.4.0, Universal Renderer.
-Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Versionen sind nicht geprüft.
+**English** | [Deutsch](README.de.md)
 
-## Installation in ein neues Projekt
+A global four-colour pixel filter for Unity 6 URP 3D, using the Universal Renderer.
 
-1. Universal-3D-Projekt (URP) öffnen.
-2. PocketPixel-1.0.1.unitypackage über Assets > Import Package > Custom Package importieren.
-3. Kompilierung abwarten. Die Renderer-Einbindung wird automatisch eingerichtet.
-4. Assets/PocketPixel/Pixel Filter.prefab in die Hierarchy ziehen.
-5. Objekt auswählen: alle Regler stehen direkt im Inspector.
+Development environment: Unity 6000.4.0f1, URP 17.4.0, Universal Renderer, Windows/DX12 Editor.
+The Built-in Render Pipeline, HDRP and URP 2D Renderer are not supported. Other versions and standalone player builds have not been verified. See [validation status](VALIDATION.md).
 
-Alternativ: GameObject > Effects > Pixel Filter erzeugt ein neues Filter-Objekt.
-Bei einem späteren Wechsel der Render-Pipeline: Tools > Pixel Filter > Installieren oder reparieren.
-Die Einrichtung verändert ausschließlich die Renderer der in Graphics/Quality Settings verwendeten URP-Assets.
+## Installation
 
-## Verhalten wie ein globales Post-Process-Volume
+1. Open your **Universal 3D (URP)** project in Unity. The camera must use a **Universal Renderer**.
+2. Download **PocketPixel-1.0.1.unitypackage** and drag the downloaded file from your file browser into Unity's **Project window**, in the **Assets** area.
+3. In the **Import Unity Package** window, keep all package items selected and click **Import**.
+4. Wait for Unity to finish importing and compiling. The renderer feature is installed automatically.
+5. In the Project window, open **Assets/PocketPixel** and drag **Pixel Filter.prefab** into the **Hierarchy** (or Scene view).
+6. Select the new filter object and adjust its settings in the **Inspector**. The filter applies to the whole camera image.
 
-- Kein aktives Filter-Objekt: kein Effekt.
-- Objekt oder Pixel-Filter-Komponente deaktivieren: Effekt aus.
-- Position, Rotation und Skalierung des Objekts sind egal; es wirkt global.
-- Keine räumliche Box, Eintrittszone oder Überblendung an Volumengrenzen.
-- Mehrere Objekte: höchste Priorität gewinnt. Gleiche Priorität vermeiden.
-- Der Effekt gilt für die geladenen Szenen; Scene-Vorschau lässt sich separat ausschalten.
-- Kamera-Stacks werden am Ende gefiltert; Screen-Space-Overlay-UI bleibt ungefiltert.
-- Im Prefab-Modus sind Vorschauobjekte nicht als Szenenfilter aktiv.
+**Importing the package alone does not enable the effect. A filter object must be present and enabled in the scene.**
 
-## Vorlagen und eigene Farben
+If drag and drop does not open the import window, use **Assets > Import Package > Custom Package...**, select the same `.unitypackage` file and click **Import** in the import window.
+The complete ZIP is an alternative download containing source, previews and documentation; it is not needed for the Unity package installation.
 
-Warmgelb entspricht der bisherigen warmen Palette. Außerdem: Grün, Eisblau, Violett, Schwarzweiß.
-Das gelbe Standard-Prefab liegt direkt im PocketPixel-Ordner; weitere Vorlagen liegen unter Prefabs als eigene Prefabs. Alle Paletten sind auch im Inspector unter Farbvorlage auswählbar.
-Eine Vorlage überschreibt nur die vier Farben und die Linienfarbe, nicht Pixelgröße/Belichtung.
-Farbfelder können danach frei geändert werden. "Farbvorlage erneut anwenden" stellt die Vorlagenfarben wieder her.
-"Alle Filterwerte zurücksetzen" stellt Warmgelb und die ursprünglichen Effektwerte wieder her.
-Eigene Vorlage: ein eingestelltes Objekt aus der Hierarchy in deinen eigenen Project-Ordner ziehen.
-Alle Werte sind pro Objekt gespeichert; ein Objekt verändert kein gemeinsam verwendetes Material.
+Alternatively, **GameObject > Effects > Pixel Filter** creates a filter object and checks renderer integration.
+If no effect appears, run **Tools > Pixel Filter > Installieren oder reparieren** (Install or repair) outside Play Mode.
+Setup only modifies the Universal Renderer assets referenced by URP assets in Graphics and Quality Settings.
 
-## Regler
+The custom Inspector and menu labels are currently in German.
 
-- Vertikale Pixelanzahl: kleinere Zahl = gröbere Blöcke. Tatsächliche Pixelgröße hängt von der Fensterauflösung ab.
-- Belichtung/Kontrast: Verteilung auf vier Helligkeitsstufen.
-- Dithering: Rasterübergänge zwischen Farben.
-- Umrandung: Tiefen- und Normalenkanten; wirkt unabhängig von der Oberflächenfarbe.
-- Linienstärke: Dezimalwerte 0–4 in Filterpixeln; beispielsweise 0.25. Unterhalb eines Bildschirmpixels wird die Linie abgeschwächt.
-- Transparente Materialien ohne Tiefen-/Normalenpass bekommen keine zuverlässigen Umrandungen.
+## Global filter behaviour
 
-## Technik und Grenzen
+- No active filter object: no effect.
+- Disable the object or its Pixel Filter component to turn the effect off.
+- Position, rotation and scale do not affect the filter; it applies globally.
+- There are no spatial bounds, entry zones or volume-boundary blends.
+- With multiple filter objects, the highest priority wins. Avoid equal priorities.
+- The effect applies across loaded scenes. Scene view preview can be disabled separately.
+- Camera stacks are filtered at the final camera. Screen Space - Overlay UI remains unfiltered.
+- Preview objects in Prefab Mode do not act as scene filters.
 
-Die Installation ergänzt ein eigenes URP Renderer Feature. Es überspringt den Renderpass vollständig,
-wenn kein aktives Filter-Objekt existiert. Materialinstanzen werden nur intern erzeugt und wieder freigegeben.
-Shaderreferenzen werden im Renderer gespeichert, damit der Shader im Build enthalten bleibt.
-Der Filter reduziert nicht die interne 3D-Renderauflösung. Er ist für SDR-Desktop vorgesehen;
-XR, HDR-Ausgabe und dynamische Auflösung sind nicht geprüft. Nachgeschaltetes Antialiasing oder Upscaling kann Pixel glätten.
+## Presets and custom colours
 
-## Weitergeben
+The available palettes are warm yellow (Warmgelb), green (Gruen), ice blue (Eisblau), violet (Violett) and black and white (Schwarzweiss).
+The default warm-yellow prefab is in the PocketPixel folder. Additional preset prefabs are in its Prefabs subfolder.
+All palettes can also be selected in the Inspector under **Farbvorlage**.
 
-Nur den Ordner Assets/PocketPixel über Assets > Export Package exportieren, keine Projektszenen,
-Pipeline-Assets, Spieler, Fackel oder Library-Ordner mitliefern. Das beiliegende unitypackage ist bereits so zusammengestellt.
-Vor einer öffentlichen Store-Veröffentlichung sind zusätzliche Plattformtests und Produktdokumentation erforderlich.
+Applying a preset changes only the four palette colours and the outline colour, leaving pixel size and exposure unchanged.
+Colours can be edited freely afterwards. **Farbvorlage erneut anwenden** reapplies the preset colours.
+**Alle Filterwerte zurücksetzen** restores the warm-yellow palette and default effect settings.
 
-## Auswahl in der Scene-Ansicht
-Das vierfarbige Pixel-Symbol ist anklickbar und bleibt im Spiel unsichtbar. Scene-Gizmos einschalten. Es markiert nur das Filterobjekt, keine räumliche Effektgrenze.
+To create a custom preset, drag a configured object from the Hierarchy into your own Project folder.
+Settings are stored per object; changing one object does not modify a shared material.
 
+## Controls
 
-## Lizenz und Quellcode
-Privat und kommerziell nutzbar, veränderbar und weitergebbar. Veröffentlichte Produkte müssen PocketPixel - minmax.ch in den Credits nennen. Vollständige Bedingungen: LICENSE.txt (eigene Lizenz, nicht unverändertes MIT).
-Alle C#- und Shaderquellen liegen bei. TECHNICAL.md erklärt die Wartung für Menschen und KI; TROUBLESHOOTING.md die Fehlerdiagnose.
+- **Vertical pixel count:** lower values produce larger blocks. Actual pixel size depends on the output resolution.
+- **Exposure / contrast:** control the mapping to four brightness levels.
+- **Dithering:** adds patterned transitions between colours.
+- **Outlines:** detect depth and surface-normal edges independently of surface colour.
+- **Outline width:** accepts fractional values from 0 to 4 in filter pixels, such as 0.25. Lines thinner than one screen pixel are attenuated.
+- Transparent materials without depth/normal passes do not receive reliable outlines.
 
+## Implementation and limitations
+
+Setup adds a custom URP Renderer Feature. When no filter object is active, the feature does not enqueue its filter pass.
+The material is created internally on demand, reused and released when the feature is disposed.
+A shader reference is stored in the renderer feature so the shader can be included in builds.
+
+The filter pixelates the rendered image; it does not reduce the internal 3D rendering resolution.
+URP may require additional colour-copy or depth/normal passes, so one filter pass does not imply a single GPU operation for the entire effect.
+
+The filter is intended for SDR desktop output. XR, HDR output and dynamic resolution have not been tested.
+Subsequent antialiasing or upscaling may soften the pixels.
+
+## Redistribution
+
+Export only `Assets/PocketPixel` using **Assets > Export Package**.
+Do not include project-specific scenes, pipeline assets, unrelated game objects or the Library folder.
+The included Unity package is already assembled this way.
+
+Additional platform testing and product documentation are required before a public asset-store release.
+
+## Selecting the filter in the Scene view
+
+Enable Scene Gizmos to see and select the four-colour pixel icon.
+The icon remains invisible in the game and identifies the filter object; it does not represent spatial effect bounds.
+
+## Licence and source code
+
+Private and commercial use, modification and redistribution are permitted under the included licence.
+Publicly distributed products incorporating PocketPixel must include the attribution required by the included licence in their credits or acknowledgments, or in an accessible About screen or accompanying end-user documentation if they have no credits section.
+See [LICENSE.txt](LICENSE.txt) for the complete terms. This is a custom attribution licence, not the unmodified MIT License.
+
+All C# and shader source files are included.
+[TECHNICAL.md](TECHNICAL.md) covers implementation and maintenance; [TROUBLESHOOTING.md](TROUBLESHOOTING.md) covers troubleshooting. English and German READMEs are included in the downloads. The technical, troubleshooting and validation guides are in English.

@@ -3,8 +3,8 @@
 [English](README.md) | **Deutsch**
 
 Globaler Vierfarben-Pixelfilter für Unity 6 URP 3D mit dem Universal Renderer.
-Entwickelt und geprüft mit Unity 6000.4.0f1 und URP 17.4.0, Universal Renderer.
-Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Versionen sind nicht geprüft.
+Entwicklungsumgebung: Unity 6000.4.0f1, URP 17.4.0, Universal Renderer, Windows-/DX12-Editor.
+Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Versionen und eigenständige Player-Builds sind nicht verifiziert. Siehe [Prüfstand](VALIDATION.md).
 
 ## Vorschauen
 
@@ -22,17 +22,23 @@ Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Versionen s
 
 [Komplettpaket mit Quellcode, Vorschauen und Dokumentation herunterladen (.zip)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.1-komplett.zip)
 
-## Installation in ein neues Projekt
+## Installation
 
-1. Universal-3D-Projekt (URP) öffnen.
-2. PocketPixel-1.0.1.unitypackage über Assets > Import Package > Custom Package importieren.
-3. Kompilierung abwarten. Die Renderer-Einbindung wird automatisch eingerichtet.
-4. Assets/PocketPixel/Pixel Filter.prefab in die Hierarchy ziehen.
-5. Objekt auswählen: alle Regler stehen direkt im Inspector.
+1. Dein **Universal-3D-Projekt (URP)** in Unity öffnen. Die Kamera muss einen **Universal Renderer** verwenden.
+2. **PocketPixel-1.0.1.unitypackage** herunterladen und die Datei aus dem Datei-Explorer in Unitys **Project-Fenster**, in den **Assets-Bereich**, ziehen.
+3. Im Fenster **Import Unity Package** alle enthaltenen Dateien ausgewählt lassen und auf **Import** klicken.
+4. Warten, bis Unity den Import und die Kompilierung abgeschlossen hat. Das Renderer Feature wird automatisch eingerichtet.
+5. Im Project-Fenster **Assets/PocketPixel** öffnen und **Pixel Filter.prefab** in die **Hierarchy** (oder Scene-Ansicht) ziehen.
+6. Das neue Filterobjekt auswählen und im **Inspector** einstellen. Der Filter wirkt auf das gesamte Kamerabild.
 
-Alternativ: GameObject > Effects > Pixel Filter erzeugt ein neues Filter-Objekt.
-Bei einem späteren Wechsel der Render-Pipeline: Tools > Pixel Filter > Installieren oder reparieren.
-Die Einrichtung verändert ausschließlich die Renderer der in Graphics/Quality Settings verwendeten URP-Assets.
+**Nur der Paketimport aktiviert den Effekt noch nicht. Dafür muss ein Filterobjekt in der Szene vorhanden und aktiviert sein.**
+
+Falls beim Ziehen der Datei kein Importfenster erscheint: **Assets > Import Package > Custom Package...** wählen, dieselbe `.unitypackage` öffnen und im Importfenster auf **Import** klicken.
+Die komplette ZIP enthält zusätzlich Quellcode, Vorschauen und Dokumentation; für die Installation des Unity-Pakets wird sie nicht benötigt.
+
+Alternativ erzeugt **GameObject > Effects > Pixel Filter** ein Filterobjekt und prüft die Renderer-Einbindung.
+Falls kein Effekt erscheint, ausserhalb des Play Modes **Tools > Pixel Filter > Installieren oder reparieren** ausführen.
+Die Einrichtung verändert nur Universal-Renderer-Assets, die von den URP-Assets in Graphics und Quality Settings verwendet werden.
 
 ## Verhalten wie ein globales Post-Process-Volume
 
@@ -70,7 +76,7 @@ Die Installation ergänzt ein eigenes URP Renderer Feature. Wenn kein Filter-Obj
 Das Material wird bei Bedarf intern erzeugt, wiederverwendet und beim Aufräumen des Features freigegeben.
 Shaderreferenzen werden im Renderer gespeichert, damit der Shader im Build enthalten bleibt.
 Der Filter verpixelt das gerenderte Bild und reduziert nicht die interne 3D-Renderauflösung.
-URP kann zusätzliche Farbkopien oder Tiefen-/Normalenpasses benötigen; ein Filterpass bedeutet daher nicht nur einen GPU-Arbeitsschritt. Er ist für SDR-Desktop vorgesehen;
+URP kann zusätzliche Farbkopien oder Tiefen-/Normalenpasses benötigen; ein Filterpass bedeutet daher nicht nur einen GPU-Arbeitsschritt. Der Filter ist für SDR-Desktop vorgesehen;
 XR, HDR-Ausgabe und dynamische Auflösung sind nicht geprüft. Nachgeschaltetes Antialiasing oder Upscaling kann Pixel glätten.
 
 ## Weitergeben
@@ -84,6 +90,5 @@ Das vierfarbige Pixel-Symbol ist anklickbar und bleibt im Spiel unsichtbar. Scen
 
 
 ## Lizenz und Quellcode
-Privat und kommerziell nutzbar, veränderbar und weitergebbar. Veröffentlichte Produkte müssen PocketPixel - minmax.ch in den Credits nennen. Vollständige Bedingungen: LICENSE.txt (eigene Lizenz, nicht unverändertes MIT).
+Privat und kommerziell nutzbar, veränderbar und weitergebbar. Veröffentlichte Produkte müssen den in der beiliegenden Lizenz vorgeschriebenen Credit enthalten. Vollständige Bedingungen: [LICENSE.txt](LICENSE.txt) (eigene Lizenz, nicht unverändertes MIT).
 Alle C#- und Shaderquellen liegen bei. [TECHNICAL.md](TECHNICAL.md) beschreibt Implementierung und Wartung; [TROUBLESHOOTING.md](TROUBLESHOOTING.md) die Fehlerdiagnose.
-

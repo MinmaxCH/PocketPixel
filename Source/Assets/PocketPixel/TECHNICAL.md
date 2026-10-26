@@ -1,9 +1,8 @@
-# PocketPixel: maintenance guide for developers and AI assistants
+# PocketPixel: technical guide
 
 Version: 1.0.1. Read LICENSE.txt before distributing modifications.
 This is complete editable source, not an obfuscated or compiled-only asset.
-No network service, account, paid plugin, Pipeline package, or AI tool is needed
-to use it. The author's local CLI was only used during development.
+Unity and URP are required dependencies; the asset needs no network service or account at runtime.
 
 ## File map
 - Runtime/PixelFilter.cs: scene component, per-object data, five palette definitions,
@@ -24,7 +23,7 @@ to use it. The author's local CLI was only used during development.
 The Runtime code depends on UnityEngine, Core rendering and Universal rendering.
 Editor-only code is in Editor/ or guarded with UNITY_EDITOR. FullScreenPassRendererFeature
 must remain inheritable and expose AddRenderPasses, Create, Dispose, passMaterial,
-requirements, fetchColorBuffer and injectionPoint. This is verified for URP 17.4.
+requirements, fetchColorBuffer and injectionPoint. The supplied release reports cover URP 17.4.0.
 Do not claim automatic compatibility with unknown future versions. If Unity changes
 these APIs, adapt only the feature adapter to the new public rendering API.
 Keep the Unity-provided RenderGraph path; do not force legacy Compatibility Mode.
@@ -44,7 +43,7 @@ there are no fixed Assets paths in runtime or installation code.
 - Preview/reflection cameras are skipped; only the final camera of a stack is filtered.
 - The feature owns and disposes an internal transient material. Object settings never
   write to a shared material asset. Keep this isolation when modifying the effect.
-- SetPalette copies values, so custom colors remain editable. Palette changes preserve
+- ApplyPalette copies values, so custom colors remain editable. Palette changes preserve
   non-color settings. Reset restores warm-yellow effect defaults.
 
 ## Reproducing checks
@@ -59,15 +58,21 @@ there are no fixed Assets paths in runtime or installation code.
 8. Build a test player for each platform you intend to advertise. Verify shader inclusion,
    scene switching and quality switching. Do not infer player support from Editor captures.
 
-## Actual release verification
-Unity 6000.4.0f1, URP 17.4.0, Windows/DX12 Editor: C# and shader compilation,
-five palette renders, object-disable/component-disable/delete comparisons, custom Inspector
-display and export have been checked. 1.0.1 additionally checks idempotent renderer discovery.
+## Supplied release verification
+The original 1.0.1 reports describe checks in Unity 6000.4.0f1, URP 17.4.0 and the Windows/DX12 Editor:
+C# and shader compilation, five palette renders, object-disable/component-disable/delete comparisons,
+custom Inspector display, export and idempotent renderer discovery.
 Play-mode lifecycle edge cases, standalone builds, other Unity versions, other GPUs,
-mobile, WebGL, XR and HDR output have NOT been certified. The included report records
-the checks actually executed; the checklist above also includes future validation tasks.
+mobile, WebGL, XR and HDR output remain unverified. The included report records
+the supplied results; the checklist above also includes future validation tasks.
+These tests were not rerun during the 2026-10-27 documentation refresh. See VALIDATION.md.
 
 ## Distribution
+The supported scope is Universal Renderer (3D), not Renderer2D, HDRP or Built-in.
+The package includes English and German READMEs; the guides are in English.
+Run `python tools/build_release.py` and `python tools/check_release.py` from the repository
+to rebuild and verify the download containers without changing asset GUIDs.
+
 Export only Assets/PocketPixel with ExportPackageOptions.Recurse (not IncludeDependencies).
 Keep GUIDs/.meta files. Include source + license + docs in the download. Never ship Library,
 Temp, logs, the author's level, URP package source, or editor-automation credentials.

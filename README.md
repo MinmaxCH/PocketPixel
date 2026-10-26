@@ -4,8 +4,8 @@
 
 A global four-colour pixel filter for Unity 6 URP 3D, using the Universal Renderer.
 
-Developed and tested with Unity 6000.4.0f1 and URP 17.4.0 using the Universal Renderer.
-The Built-in Render Pipeline, HDRP and URP 2D Renderer are not supported. Other versions have not been tested.
+Development environment: Unity 6000.4.0f1, URP 17.4.0, Universal Renderer, Windows/DX12 Editor.
+The Built-in Render Pipeline, HDRP and URP 2D Renderer are not supported. Other versions and standalone player builds have not been verified. See [validation status](VALIDATION.md).
 
 ## Previews
 
@@ -23,17 +23,23 @@ The Built-in Render Pipeline, HDRP and URP 2D Renderer are not supported. Other 
 
 [Download the complete package with source code, previews and documentation (.zip)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.1-komplett.zip)
 
-## Installation in a new project
+## Installation
 
-1. Open a Universal 3D project (URP).
-2. Import `PocketPixel-1.0.1.unitypackage` via **Assets > Import Package > Custom Package**.
-3. Wait for compilation to finish. Renderer integration is configured automatically.
-4. Drag `Assets/PocketPixel/Pixel Filter.prefab` into the Hierarchy.
-5. Select the object to access all controls in the Inspector.
+1. Open your **Universal 3D (URP)** project in Unity. The camera must use a **Universal Renderer**.
+2. Download **PocketPixel-1.0.1.unitypackage** and drag the downloaded file from your file browser into Unity's **Project window**, in the **Assets** area.
+3. In the **Import Unity Package** window, keep all package items selected and click **Import**.
+4. Wait for Unity to finish importing and compiling. The renderer feature is installed automatically.
+5. In the Project window, open **Assets/PocketPixel** and drag **Pixel Filter.prefab** into the **Hierarchy** (or Scene view).
+6. Select the new filter object and adjust its settings in the **Inspector**. The filter applies to the whole camera image.
 
-Alternatively, use **GameObject > Effects > Pixel Filter** to create a filter object.
-If you change the render pipeline later, use **Tools > Pixel Filter > Installieren oder reparieren** (Install or repair).
-Setup only modifies the renderers referenced by the URP assets used in Graphics and Quality Settings.
+**Importing the package alone does not enable the effect. A filter object must be present and enabled in the scene.**
+
+If drag and drop does not open the import window, use **Assets > Import Package > Custom Package...**, select the same `.unitypackage` file and click **Import** in the import window.
+The complete ZIP is an alternative download containing source, previews and documentation; it is not needed for the Unity package installation.
+
+Alternatively, **GameObject > Effects > Pixel Filter** creates a filter object and checks renderer integration.
+If no effect appears, run **Tools > Pixel Filter > Installieren oder reparieren** (Install or repair) outside Play Mode.
+Setup only modifies the Universal Renderer assets referenced by URP assets in Graphics and Quality Settings.
 
 The custom Inspector and menu labels are currently in German.
 
@@ -98,8 +104,8 @@ The icon remains invisible in the game and identifies the filter object; it does
 ## Licence and source code
 
 Private and commercial use, modification and redistribution are permitted under the included licence.
-Publicly distributed products incorporating PocketPixel must include **PocketPixel - minmax.ch** in their credits or acknowledgments, or in an accessible About screen or accompanying end-user documentation if they have no credits section.
+Publicly distributed products incorporating PocketPixel must include the attribution required by the included licence in their credits or acknowledgments, or in an accessible About screen or accompanying end-user documentation if they have no credits section.
 See [LICENSE.txt](LICENSE.txt) for the complete terms. This is a custom attribution licence, not the unmodified MIT License.
 
 All C# and shader source files are included.
-[TECHNICAL.md](TECHNICAL.md) covers implementation and maintenance; [TROUBLESHOOTING.md](TROUBLESHOOTING.md) covers troubleshooting. These documents and the documentation bundled in the downloads are currently in German.
+[TECHNICAL.md](TECHNICAL.md) covers implementation and maintenance; [TROUBLESHOOTING.md](TROUBLESHOOTING.md) covers troubleshooting. English and German READMEs are included in the downloads. The technical, troubleshooting and validation guides are in English.
