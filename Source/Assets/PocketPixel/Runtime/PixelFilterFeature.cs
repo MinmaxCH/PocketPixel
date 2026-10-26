@@ -7,9 +7,6 @@ namespace PocketPixel
     public sealed class PixelFilterFeature : FullScreenPassRendererFeature
     {
         public Shader filterShader;
-        [Tooltip("2D Renderer: Konturen aus Farbkontrasten statt 3D-Tiefen/Normalen. Wird vom Installer automatisch gesetzt.")]
-        public bool useColorOutlines;
-        static readonly int ColorOutlinesId = Shader.PropertyToID("_ColorOutlines");
         Material instance;
         public override void Create()
         {
@@ -29,18 +26,10 @@ namespace PocketPixel
             if (!camera.resolveFinalTarget) return;
             if (instance == null) instance = CoreUtils.CreateEngineMaterial(filterShader);
             filter.WriteMaterial(instance);
-            instance.SetFloat(ColorOutlinesId, useColorOutlines ? 1 : 0);
             passMaterial = instance;
             fetchColorBuffer = true;
             injectionPoint = InjectionPoint.AfterRenderingPostProcessing;
-            bindDepthStencilAttachment = false;
-            // Renderer2D checks the Color input when deciding whether to allocate an
-            // intermediate camera texture, even with camera post-processing disabled.
-            // fetchColorBuffer samples the completed frame, including transparent sprites.
-            // Never request 3D depth/normals textures from the 2D renderer.
-            requirements = useColorOutlines ? ScriptableRenderPassInput.Color :
-                filter.outlines && filter.outlineWidth > 0 ?
-                ScriptableRenderPassInput.Depth | ScriptableRenderPassInput.Normal : ScriptableRenderPassInput.None;
+            requirements = filter.outlines ? ScriptableRenderPassInput.Depth | ScriptableRenderPassInput.Normal : ScriptableRenderPassInput.None;
             base.AddRenderPasses(renderer, ref renderingData);
         }
 

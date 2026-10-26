@@ -1,13 +1,3 @@
-# 1.0.2-preview — URP 2D integration
-
-- Auto-install and repair the feature on Universal and 2D Renderer assets, preserving existing GUIDs.
-- Request camera colour in 2D so post-processing need not be enabled to allocate an intermediate target.
-- Use colour-contrast outlines for sprites/tilemaps without requesting 3D depth or normal textures.
-- Keep the existing Universal Renderer depth/normal outline path.
-- Include renderer type and outline source in diagnostics.
-- New preview downloads; original 1.0.1 packages and licence remain unchanged.
-- Validation status: source/package checks only. Unity compilation, visual checks and player builds pending.
-
 # Changelog
 
 ## 1.0.1 — 2026-10-25

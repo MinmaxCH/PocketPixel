@@ -1,10 +1,10 @@
-# PocketPixel 1.0.2-preview
+# PocketPixel 1.0.1
 
 [English](README.md) | **Deutsch**
 
-Globaler Vierfarben-Pixelfilter für Unity 6 / Universal Render Pipeline.
-Version 1.0.1 wurde mit Unity 6000.4.0f1 und URP 17.4.0 im Universal Renderer geprüft.
-Diese Vorschau ergänzt den URP 2D Renderer. Der neue Code wurde noch nicht im Unity Editor oder in einem Player-Build getestet; siehe [2D-Testablauf](TEST-2D.md). Built-in und HDRP werden nicht unterstützt. Andere Versionen sind nicht geprüft.
+Globaler Vierfarben-Pixelfilter für Unity 6 URP 3D mit dem Universal Renderer.
+Entwickelt und geprüft mit Unity 6000.4.0f1 und URP 17.4.0, Universal Renderer.
+Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Versionen sind nicht geprüft.
 
 ## Vorschauen
 
@@ -18,16 +18,16 @@ Diese Vorschau ergänzt den URP 2D Renderer. Der neue Code wurde noch nicht im U
 
 ## Download
 
-**[PocketPixel 1.0.2 Vorschau für Unity herunterladen (.unitypackage)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.2-preview.unitypackage)**
+**[PocketPixel 1.0.1 für Unity herunterladen (.unitypackage)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.1.unitypackage)**
 
-[Komplettpaket mit Quellcode, Vorschauen und Dokumentation herunterladen (.zip)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.2-preview-komplett.zip)
+[Komplettpaket mit Quellcode, Vorschauen und Dokumentation herunterladen (.zip)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.1-komplett.zip)
 
 Das Repository ist privat; für den Download ist ein GitHub-Konto mit Zugriff erforderlich.
 
 ## Installation in ein neues Projekt
 
-1. Universal-3D- oder Universal-2D-Projekt (URP) öffnen.
-2. PocketPixel-1.0.2-preview.unitypackage über Assets > Import Package > Custom Package importieren.
+1. Universal-3D-Projekt (URP) öffnen.
+2. PocketPixel-1.0.1.unitypackage über Assets > Import Package > Custom Package importieren.
 3. Kompilierung abwarten. Die Renderer-Einbindung wird automatisch eingerichtet.
 4. Assets/PocketPixel/Pixel Filter.prefab in die Hierarchy ziehen.
 5. Objekt auswählen: alle Regler stehen direkt im Inspector.
@@ -62,9 +62,9 @@ Alle Werte sind pro Objekt gespeichert; ein Objekt verändert kein gemeinsam ver
 - Vertikale Pixelanzahl: kleinere Zahl = gröbere Blöcke. Tatsächliche Pixelgröße hängt von der Fensterauflösung ab.
 - Belichtung/Kontrast: Verteilung auf vier Helligkeitsstufen.
 - Dithering: Rasterübergänge zwischen Farben.
-- Umrandung: Im Universal Renderer Tiefen-/Normalenkanten, im 2D Renderer sichtbare Farbkontraste im Kamerabild (auch innerhalb von Sprites). Kontrastarme Grenzen werden möglicherweise nicht umrandet.
+- Umrandung: Tiefen- und Normalenkanten; wirkt unabhängig von der Oberflächenfarbe.
 - Linienstärke: Dezimalwerte 0–4 in Filterpixeln; beispielsweise 0.25. Unterhalb eines Bildschirmpixels wird die Linie abgeschwächt.
-- Im Universal Renderer bekommen transparente Materialien ohne Tiefen-/Normalenpass keine zuverlässigen Umrandungen. Der 2D-Farbmodus benötigt diese Pässe nicht.
+- Transparente Materialien ohne Tiefen-/Normalenpass bekommen keine zuverlässigen Umrandungen.
 
 ## Technik und Grenzen
 

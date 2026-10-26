@@ -11,7 +11,7 @@ namespace PocketPixel.Editor
         public static string CreateReport()
         {
             var text=new StringBuilder();
-            text.AppendLine("PocketPixel 1.0.2-preview diagnostic report");
+            text.AppendLine("PocketPixel 1.0.1 diagnostic report");
             text.AppendLine("Unity: "+Application.unityVersion);
             var package=UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(UniversalRenderPipelineAsset).Assembly);
             text.AppendLine("URP: "+(package?.version ?? "unknown"));
@@ -36,12 +36,7 @@ namespace PocketPixel.Editor
             }
             var features=Resources.FindObjectsOfTypeAll<PixelFilterFeature>();
             text.AppendLine("Loaded renderer features: "+features.Length);
-            foreach(var feature in features) text.AppendLine("Feature: active="+feature.isActive+", shaderAssigned="+(feature.filterShader!=null)+", outlineSource="+(feature.useColorOutlines ? "2D colour" : "3D depth/normal"));
-            foreach(var camera in Object.FindObjectsByType<Camera>(FindObjectsSortMode.None))
-            {
-                if(camera.TryGetComponent<UniversalAdditionalCameraData>(out var data))
-                    text.AppendLine("Camera: type="+camera.cameraType+", renderer="+data.scriptableRenderer?.GetType().Name+", postProcessing="+data.renderPostProcessing);
-            }
+            foreach(var feature in features) text.AppendLine("Feature: active="+feature.isActive+", shaderAssigned="+(feature.filterShader!=null));
             text.AppendLine("This report omits file paths, object names, usernames and full console logs. Review before sharing.");
             return text.ToString();
         }
