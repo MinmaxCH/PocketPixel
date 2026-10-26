@@ -34,6 +34,7 @@ namespace PocketPixel.Editor
             EditorGUILayout.Space();
             Field("pixelHeight","Vertikale Pixelanzahl"); Field("exposure","Belichtung"); Field("contrast","Kontrast"); Field("dithering","Dithering");
             Field("outlines","Umrandung aktiviert");
+            EditorGUILayout.HelpBox("Konturen werden automatisch angepasst: Universal Renderer = Tiefe/Normalen; 2D Renderer = sichtbare Farbkontraste (auch innerhalb von Sprites).", MessageType.Info);
             var width=serializedObject.FindProperty("outlineWidth");
             EditorGUI.showMixedValue=width.hasMultipleDifferentValues;
             EditorGUI.BeginChangeCheck();

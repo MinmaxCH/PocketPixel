@@ -1,13 +1,13 @@
-# PocketPixel 1.0.1
+# PocketPixel 1.0.2-preview
 
 Globaler Vierfarben-Pixelfilter für Unity 6 / Universal Render Pipeline.
-Entwickelt und geprüft mit Unity 6000.4.0f1 und URP 17.4.0, Universal Renderer.
-Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Versionen sind nicht geprüft.
+Version 1.0.1 wurde mit Unity 6000.4.0f1 und URP 17.4.0 im Universal Renderer geprüft.
+Diese Vorschau ergänzt den URP 2D Renderer. Der neue Code ist noch nicht im Unity Editor oder Player getestet. Built-in und HDRP werden nicht unterstützt. Andere Versionen sind nicht geprüft.
 
 ## Installation in ein neues Projekt
 
-1. Universal-3D-Projekt (URP) öffnen.
-2. PocketPixel-1.0.1.unitypackage über Assets > Import Package > Custom Package importieren.
+1. Universal-3D- oder Universal-2D-Projekt (URP) öffnen.
+2. PocketPixel-1.0.2-preview.unitypackage über Assets > Import Package > Custom Package importieren.
 3. Kompilierung abwarten. Die Renderer-Einbindung wird automatisch eingerichtet.
 4. Assets/PocketPixel/Pixel Filter.prefab in die Hierarchy ziehen.
 5. Objekt auswählen: alle Regler stehen direkt im Inspector.
@@ -29,7 +29,7 @@ Die Einrichtung verändert ausschließlich die Renderer der in Graphics/Quality 
 
 ## Vorlagen und eigene Farben
 
-Warmgelb entspricht der bisherigen warmen Palette. Außerdem: Grün, Eisblau, Violett, Schwarzweiß.
+Farbvorlagen: Warmgelb, Grün, Eisblau, Violett und Schwarzweiss.
 Das gelbe Standard-Prefab liegt direkt im PocketPixel-Ordner; weitere Vorlagen liegen unter Prefabs als eigene Prefabs. Alle Paletten sind auch im Inspector unter Farbvorlage auswählbar.
 Eine Vorlage überschreibt nur die vier Farben und die Linienfarbe, nicht Pixelgröße/Belichtung.
 Farbfelder können danach frei geändert werden. "Farbvorlage erneut anwenden" stellt die Vorlagenfarben wieder her.
@@ -42,9 +42,9 @@ Alle Werte sind pro Objekt gespeichert; ein Objekt verändert kein gemeinsam ver
 - Vertikale Pixelanzahl: kleinere Zahl = gröbere Blöcke. Tatsächliche Pixelgröße hängt von der Fensterauflösung ab.
 - Belichtung/Kontrast: Verteilung auf vier Helligkeitsstufen.
 - Dithering: Rasterübergänge zwischen Farben.
-- Umrandung: Tiefen- und Normalenkanten; wirkt unabhängig von der Oberflächenfarbe.
+- Umrandung: Im Universal Renderer Tiefen-/Normalenkanten, im 2D Renderer sichtbare Farbkontraste im Kamerabild. Diese können auch innerhalb eines Sprites auftreten; kontrastarme Grenzen werden möglicherweise nicht umrandet.
 - Linienstärke: Dezimalwerte 0–4 in Filterpixeln; beispielsweise 0.25. Unterhalb eines Bildschirmpixels wird die Linie abgeschwächt.
-- Transparente Materialien ohne Tiefen-/Normalenpass bekommen keine zuverlässigen Umrandungen.
+- Im Universal Renderer bekommen transparente Materialien ohne Tiefen-/Normalenpass keine zuverlässigen Umrandungen. Der 2D-Farbmodus benötigt diese Pässe nicht.
 
 ## Technik und Grenzen
 
@@ -57,7 +57,7 @@ XR, HDR-Ausgabe und dynamische Auflösung sind nicht geprüft. Nachgeschaltetes 
 ## Weitergeben
 
 Nur den Ordner Assets/PocketPixel über Assets > Export Package exportieren, keine Projektszenen,
-Pipeline-Assets, Spieler, Fackel oder Library-Ordner mitliefern. Das beiliegende unitypackage ist bereits so zusammengestellt.
+Pipeline-Assets, projektfremde Spielobjekte oder Library-Ordner mitliefern. Das beiliegende unitypackage ist bereits so zusammengestellt.
 Vor einer öffentlichen Store-Veröffentlichung sind zusätzliche Plattformtests und Produktdokumentation erforderlich.
 
 ## Auswahl in der Scene-Ansicht

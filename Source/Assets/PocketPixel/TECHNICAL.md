@@ -1,6 +1,6 @@
 # PocketPixel: maintenance guide for developers and AI assistants
 
-Version: 1.0.1. Read LICENSE.txt before distributing modifications.
+Version: 1.0.2-preview. Read LICENSE.txt before distributing modifications.
 This is complete editable source, not an obfuscated or compiled-only asset.
 No network service, account, paid plugin, Pipeline package, or AI tool is needed
 to use it. The author's local CLI was only used during development.
@@ -11,7 +11,7 @@ to use it. The author's local CLI was only used during development.
 - Runtime/PixelFilterFeature.cs: small URP integration layer derived from Unity's
   FullScreenPassRendererFeature; uses Unity's supplied RenderGraph implementation.
 - Shaders/PixelFilter.shader: block sampling, luminance quantization, Bayer dithering,
-  depth/normal outlines and fractional outline coverage. Includes URP/Core HLSL.
+  depth/normal outlines (3D), colour-contrast outlines (2D) and fractional outline coverage. Includes URP/Core HLSL.
 - Editor/PixelFilterSetup.cs: discovers renderer asset references by serialized type
   in Graphics/Quality URP assets. Does not rely on m_RendererDataList's private name.
   Adds the feature idempotently, serializes the shader reference and saves assets.
@@ -28,7 +28,7 @@ requirements, fetchColorBuffer and injectionPoint. This is verified for URP 17.4
 Do not claim automatic compatibility with unknown future versions. If Unity changes
 these APIs, adapt only the feature adapter to the new public rendering API.
 Keep the Unity-provided RenderGraph path; do not force legacy Compatibility Mode.
-Automatic discovery uses SerializedObject and the public UniversalRendererData type.
+Automatic discovery uses SerializedObject and the public UniversalRendererData and Renderer2DData types.
 If renderer serialization changes, use the documented manual installation fallback.
 
 The ShaderLab name is PocketPixel/Four Colour Camera. Installer and feature fallback
@@ -47,6 +47,27 @@ there are no fixed Assets paths in runtime or installation code.
 - SetPalette copies values, so custom colors remain editable. Palette changes preserve
   non-color settings. Reset restores warm-yellow effect defaults.
 
+## 2D integration (preview, runtime validation pending)
+The installer accepts UniversalRendererData and Renderer2DData references in every
+Graphics/Quality URP asset. Each feature stores useColorOutlines for its owning renderer:
+false for Universal, true for 2D. Repair updates existing features without adding duplicates.
+For manual installation on a 2D Renderer, enable Use Color Outlines on the feature.
+
+In 2D, requirements is Color, with fetchColorBuffer enabled. Renderer2D uses the Color
+input to allocate an intermediate camera texture even with camera post-processing off.
+The source is the completed camera colour, including transparent sprites, not an opaque-only texture.
+Depth and Normal inputs are never requested in 2D. The shader's colour branch samples
+neighbouring image colours; it does not sample scene depth or scene normals. RGB contrast
+in display space is mapped with smoothstep(0.10, 0.25). Outlines follow visible image
+boundaries (including sprite details), not object IDs or occluded sprite silhouettes.
+The existing outlines toggle, colour and fractional width also apply in 2D.
+The Universal Renderer retains its original depth/normal algorithm.
+
+This preview was prepared without a local Unity Editor. Source/package checks do not
+establish Unity compilation, RenderGraph execution or player compatibility. See TEST-2D.md
+in the repository for the required acceptance checks, including post-processing off,
+transparent sprites, Pixel Perfect Camera and a 3D regression check.
+
 ## Reproducing checks
 1. Import into a fresh Universal-3D project, wait for compilation, inspect Console.
 2. Verify repair twice doesn't add duplicate features; check every quality renderer.
@@ -59,7 +80,7 @@ there are no fixed Assets paths in runtime or installation code.
 8. Build a test player for each platform you intend to advertise. Verify shader inclusion,
    scene switching and quality switching. Do not infer player support from Editor captures.
 
-## Actual release verification
+## Historical 1.0.1 verification (not a test of this preview)
 Unity 6000.4.0f1, URP 17.4.0, Windows/DX12 Editor: C# and shader compilation,
 five palette renders, object-disable/component-disable/delete comparisons, custom Inspector
 display and export have been checked. 1.0.1 additionally checks idempotent renderer discovery.

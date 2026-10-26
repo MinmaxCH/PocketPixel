@@ -8,6 +8,7 @@ Shader "PocketPixel/Four Colour Camera"
         _Contrast ("Contrast", Range(0.2,3)) = 1.2
         _Dither ("Dithering", Range(0,1)) = 0.12
         [ToggleUI] _OutlineEnabled ("Umrandung aktiviert", Float) = 1
+        [HideInInspector] _ColorOutlines ("2D colour outlines", Float) = 0
         _OutlineWidth ("Linienstaerke in Filterpixeln", Float) = 0.5
         _OutlineColor ("Linienfarbe", Color) = (0.12,0.07,0.10,1)
         _Dark ("1 - Shadow", Color) = (0.247,0.165,0.216,1)
@@ -31,7 +32,7 @@ Shader "PocketPixel/Four Colour Camera"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareNormalsTexture.hlsl"
             CBUFFER_START(UnityPerMaterial)
                 float _EffectEnabled;
-                float _OutlineEnabled, _OutlineWidth;
+                float _OutlineEnabled, _OutlineWidth, _ColorOutlines;
                 float4 _OutlineColor;
                 float _PixelHeight, _Exposure, _Contrast, _Dither;
                 float4 _Dark, _Mid, _Light, _Bright;
@@ -84,6 +85,29 @@ Shader "PocketPixel/Four Colour Camera"
                 edge = max(edge, OutlineEdge(uv, float2(0, offset.y), depth, normal));
                 return max(edge, OutlineEdge(uv, float2(0, -offset.y), depth, normal));
             }
+            float3 ImageColour(float2 uv)
+            {
+                float3 colour = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_PointClamp, saturate(uv)).rgb;
+                #ifndef UNITY_COLORSPACE_GAMMA
+                    colour = LinearToSRGB(colour);
+                #endif
+                return colour;
+            }
+            float ColourEdge(float2 uv, float2 offset, float3 centre)
+            {
+                float3 difference = abs(ImageColour(uv + offset) - centre);
+                // Image-space edges also work for transparent sprites and tilemaps.
+                // They follow visible colour boundaries, not individual sprite IDs.
+                return smoothstep(0.10, 0.25, max(difference.r, max(difference.g, difference.b)));
+            }
+            float ColourOutlineMask(float2 uv, float2 texel, float radius, float3 centre)
+            {
+                if (radius <= 0) return 0;
+                float2 offset = texel * radius;
+                float edge = max(ColourEdge(uv, float2(offset.x, 0), centre), ColourEdge(uv, float2(-offset.x, 0), centre));
+                edge = max(edge, ColourEdge(uv, float2(0, offset.y), centre));
+                return max(edge, ColourEdge(uv, float2(0, -offset.y), centre));
+            }
             float4 Frag(Varyings input) : SV_Target
             {
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
@@ -108,13 +132,24 @@ Shader "PocketPixel/Four Colour Camera"
                 {
                     // Evaluate outlines at screen resolution so fractions of a filter pixel remain thin.
                     float2 edgeUV = input.texcoord;
-                    float depth = EyeDepth(edgeUV);
-                    float3 normal = SampleSceneNormals(edgeUV);
                     float radius = block * clamp(_OutlineWidth, 0, 4);
                     float lower = floor(radius);
-                    float edge = OutlineMask(edgeUV, 1.0 / size, lower, depth, normal);
-                    if (frac(radius) > 0.001)
-                        edge = lerp(edge, OutlineMask(edgeUV, 1.0 / size, lower + 1, depth, normal), frac(radius));
+                    float edge;
+                    [branch] if (_ColorOutlines > 0.5)
+                    {
+                        float3 centre = ImageColour(edgeUV);
+                        edge = ColourOutlineMask(edgeUV, 1.0 / size, lower, centre);
+                        if (frac(radius) > 0.001)
+                            edge = lerp(edge, ColourOutlineMask(edgeUV, 1.0 / size, lower + 1, centre), frac(radius));
+                    }
+                    else
+                    {
+                        float depth = EyeDepth(edgeUV);
+                        float3 normal = SampleSceneNormals(edgeUV);
+                        edge = OutlineMask(edgeUV, 1.0 / size, lower, depth, normal);
+                        if (frac(radius) > 0.001)
+                            edge = lerp(edge, OutlineMask(edgeUV, 1.0 / size, lower + 1, depth, normal), frac(radius));
+                    }
                     colour.rgb = lerp(colour.rgb, _OutlineColor.rgb, edge);
                 }
                 return float4(colour.rgb, 1);

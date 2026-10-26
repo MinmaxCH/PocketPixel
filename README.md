@@ -1,11 +1,11 @@
-# PocketPixel 1.0.1
+# PocketPixel 1.0.2-preview
 
 **English** | [Deutsch](README.de.md)
 
 A global four-colour pixel filter for Unity 6 and the Universal Render Pipeline (URP).
 
-Developed and tested with Unity 6000.4.0f1 and URP 17.4.0 using the Universal Renderer.
-The Built-in Render Pipeline, HDRP and URP 2D Renderer are not supported. Other versions have not been tested.
+Version 1.0.1 was developed and tested with Unity 6000.4.0f1 and URP 17.4.0 using the Universal Renderer.
+This preview adds the URP 2D Renderer. It has not yet been tested in the Unity Editor or a player build; see [2D test checklist](TEST-2D.md). Built-in and HDRP are not supported. Other versions have not been tested.
 
 ## Previews
 
@@ -19,16 +19,18 @@ The Built-in Render Pipeline, HDRP and URP 2D Renderer are not supported. Other 
 
 ## Download
 
-**[Download PocketPixel 1.0.1 for Unity (.unitypackage)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.1.unitypackage)**
+**[Download PocketPixel 1.0.2 preview for Unity (.unitypackage)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.2-preview.unitypackage)**
 
-[Download the complete package with source code, previews and documentation (.zip)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.1-komplett.zip)
+[Download the complete package with source code, previews and documentation (.zip)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.2-preview-komplett.zip)
+
+The original [1.0.1 Unity package](PocketPixel-1.0.1.unitypackage) remains available.
 
 This repository is private. Downloads require a GitHub account with access.
 
 ## Installation in a new project
 
-1. Open a Universal 3D project (URP).
-2. Import `PocketPixel-1.0.1.unitypackage` via **Assets > Import Package > Custom Package**.
+1. Open a Universal 3D or Universal 2D project (URP).
+2. Import `PocketPixel-1.0.2-preview.unitypackage` via **Assets > Import Package > Custom Package**.
 3. Wait for compilation to finish. Renderer integration is configured automatically.
 4. Drag `Assets/PocketPixel/Pixel Filter.prefab` into the Hierarchy.
 5. Select the object to access all controls in the Inspector.
@@ -68,9 +70,9 @@ Settings are stored per object; changing one object does not modify a shared mat
 - **Vertical pixel count:** lower values produce larger blocks. Actual pixel size depends on the output resolution.
 - **Exposure / contrast:** control the mapping to four brightness levels.
 - **Dithering:** adds patterned transitions between colours.
-- **Outlines:** detect depth and surface-normal edges independently of surface colour.
+- **Outlines:** the Universal Renderer uses depth and surface-normal edges; the 2D Renderer uses visible colour contrasts in the rendered image, including internal sprite details. Low-contrast boundaries may not be outlined.
 - **Outline width:** accepts fractional values from 0 to 4 in filter pixels, such as 0.25. Lines thinner than one screen pixel are attenuated.
-- Transparent materials without depth/normal passes do not receive reliable outlines.
+- In the Universal Renderer, transparent materials without depth/normal passes do not receive reliable outlines. The 2D colour mode does not need these passes.
 
 ## Implementation and limitations
 
@@ -104,4 +106,4 @@ Publicly distributed products incorporating PocketPixel must include **PocketPix
 See [LICENSE.txt](LICENSE.txt) for the complete terms. This is a custom attribution licence, not the unmodified MIT License.
 
 All C# and shader source files are included.
-[TECHNICAL.md](TECHNICAL.md) covers implementation and maintenance; [TROUBLESHOOTING.md](TROUBLESHOOTING.md) covers troubleshooting. These documents and the documentation bundled in the downloads are currently in German.
+[TECHNICAL.md](TECHNICAL.md) covers implementation and maintenance; [TROUBLESHOOTING.md](TROUBLESHOOTING.md) covers troubleshooting. The bundled README and 2D test checklist are in German; the technical and troubleshooting guides are in English.
