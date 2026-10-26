@@ -22,8 +22,6 @@ Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Versionen s
 
 [Komplettpaket mit Quellcode, Vorschauen und Dokumentation herunterladen (.zip)](https://github.com/MinmaxCH/PocketPixel/raw/refs/heads/main/PocketPixel-1.0.1-komplett.zip)
 
-Das Repository ist privat; für den Download ist ein GitHub-Konto mit Zugriff erforderlich.
-
 ## Installation in ein neues Projekt
 
 1. Universal-3D-Projekt (URP) öffnen.
