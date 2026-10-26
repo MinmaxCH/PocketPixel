@@ -1,6 +1,6 @@
 # PocketPixel troubleshooting / Hilfe
 
-Use Tools > Pixel Filter > Diagnosebericht speichern to save a diagnostic report.
+Use Tools > Pixel Filter > Save Diagnostic Report to save a diagnostic report.
 Include the first compiler/shader error and a screenshot when reporting an issue.
 The command writes a local text file; it does not upload anything.
 
@@ -15,7 +15,7 @@ activate the filter: drag Assets/PocketPixel/Pixel Filter.prefab into the Hierar
 1. Use URP with a Universal Renderer, not Built-in/HDRP/2D Renderer.
 2. Place Pixel Filter.prefab in the scene and enable its object and component.
 3. Check competing filter objects and their priorities. Turn on Scene preview if needed.
-4. Run Tools > Pixel Filter > Installieren oder reparieren outside Play mode.
+4. Run Tools > Pixel Filter > Install or Repair outside Play mode.
 5. Check the renderer actually used by the camera/quality level has an enabled Pixel Filter Feature.
 
 ## Manual installation if automatic discovery fails after a Unity update
@@ -24,6 +24,14 @@ Inspector choose Add Renderer Feature > Pixel Filter Feature. Set Filter Shader
 to the included Shaders/PixelFilter.shader. Save the renderer asset.
 Do not add a second feature when one already exists. The scene object still
 controls the effect; the renderer feature is only its integration point.
+
+## Inspector language
+Use Language / Sprache at the top of the Pixel Filter Inspector. Automatic follows
+the Unity Editor language when available, otherwise English. It does not follow
+the operating-system or game language. Choose Deutsch or English to override it.
+This setting is per user across projects, not part of the scene or prefab.
+If automatic detection is unavailable after a Unity update, manual selection still works.
+Menu commands remain English: Tools > Pixel Filter > Install or Repair / Save Diagnostic Report.
 
 ## Compiler errors in another Unity version
 The supplied 1.0.1 reports cover Unity 6000.4.0f1 / URP 17.4.0 in the Windows Editor. Other versions are

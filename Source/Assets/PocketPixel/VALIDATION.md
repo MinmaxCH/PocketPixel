@@ -1,6 +1,6 @@
 # PocketPixel 1.0.1 — validation status
 
-Documentation and package refresh: 2026-10-27. No C# code, shader, prefab settings or existing Unity GUIDs were changed in this refresh.
+Editor language and package refresh: 2026-10-27. Editor UI scripts were updated; rendering scripts, shader, prefab settings, serialized component fields and existing Unity GUIDs were not changed.
 
 ## Supported scope
 
@@ -16,11 +16,14 @@ The supplied checks cover image changes with the filter enabled, disabling/delet
 five palette differences and no reported shader errors. The accompanying report also records
 idempotent installation on two renderer assets.
 
-These reports have been preserved as supplied. They were not rerun during this documentation refresh.
+These reports have been preserved as supplied. They were not rerun during this Editor UI refresh.
 
 ## Checks for this refresh
 
-- All C# scripts, the shader, prefabs and existing metadata are byte-identical to the previous 1.0.1 package.
+- Runtime scripts, shader, prefabs and existing metadata are byte-identical to the previous 1.0.1 package.
+- The Editor language selector and translations are new in this refresh; original rendering reports do not validate this UI change.
+- All seven asset C# files and the standalone test file pass syntax parsing.
+- The actual C# language adapter was compiled and exercised with Mono against API doubles: 39 assertions passed across normal, missing and changed Unity-language API scenarios. These are adapter tests, not a Unity Editor UI test. Reproduce with python tools/test_editor_language.py (requires Mono/mcs).
 - All exported asset payloads and metadata match Source/Assets/PocketPixel.
 - The existing licence files are unchanged; the Unity package retains its original bundled licence.
 - Both language READMEs explain package import, confirming Import and adding the prefab to the scene.
@@ -30,7 +33,7 @@ These reports have been preserved as supplied. They were not rerun during this d
 
 ## Not independently verified in this refresh
 
-A Unity Editor is not available in the preparation environment. Unity compilation, visual rendering,
+A Unity Editor is not available in the preparation environment. In-Editor compilation, Inspector rendering,
 Play Mode lifecycle, performance and a standalone player build have not been rerun here.
 A build-target value in TEST-ENVIRONMENT.txt identifies the selected target; it is not evidence
 that a player was built and tested. Other GPUs/platforms, XR, HDR output and dynamic resolution

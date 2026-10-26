@@ -38,10 +38,13 @@ If drag and drop does not open the import window, use **Assets > Import Package 
 The complete ZIP is an alternative download containing source, previews and documentation; it is not needed for the Unity package installation.
 
 Alternatively, **GameObject > Effects > Pixel Filter** creates a filter object and checks renderer integration.
-If no effect appears, run **Tools > Pixel Filter > Installieren oder reparieren** (Install or repair) outside Play Mode.
+If no effect appears, run **Tools > Pixel Filter > Install or Repair** outside Play Mode.
 Setup only modifies the Universal Renderer assets referenced by URP assets in Graphics and Quality Settings.
 
-The custom Inspector and menu labels are currently in German.
+The **Language / Sprache** dropdown at the top of the Pixel Filter Inspector offers **Automatic / Automatisch**, **English** and **Deutsch**.
+Automatic follows the Unity Editor language when it can be read; untranslated or unavailable languages use English.
+The choice is saved per user and does not modify scene or prefab settings. Inspector labels, palette names, help text and buttons are translated.
+Editor menu paths remain in English in both languages. Diagnostic reports use English for consistent issue reporting.
 
 ## Global filter behaviour
 
@@ -58,11 +61,11 @@ The custom Inspector and menu labels are currently in German.
 
 The available palettes are warm yellow (Warmgelb), green (Gruen), ice blue (Eisblau), violet (Violett) and black and white (Schwarzweiss).
 The default warm-yellow prefab is in the PocketPixel folder. Additional preset prefabs are in its Prefabs subfolder.
-All palettes can also be selected in the Inspector under **Farbvorlage**.
+All palettes can also be selected in the Inspector under **Palette** (English) / **Farbvorlage** (Deutsch).
 
 Applying a preset changes only the four palette colours and the outline colour, leaving pixel size and exposure unchanged.
-Colours can be edited freely afterwards. **Farbvorlage erneut anwenden** reapplies the preset colours.
-**Alle Filterwerte zurücksetzen** restores the warm-yellow palette and default effect settings.
+Colours can be edited freely afterwards. **Reapply palette** / **Farbvorlage erneut anwenden** reapplies the preset colours.
+**Reset all filter settings** / **Alle Filterwerte zurücksetzen** restores the warm-yellow palette and default effect settings.
 
 To create a custom preset, drag a configured object from the Hierarchy into your own Project folder.
 Settings are stored per object; changing one object does not modify a shared material.

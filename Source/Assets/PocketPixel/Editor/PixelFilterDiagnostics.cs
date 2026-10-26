@@ -12,6 +12,8 @@ namespace PocketPixel.Editor
         {
             var text=new StringBuilder();
             text.AppendLine("PocketPixel 1.0.1 diagnostic report");
+            text.AppendLine("Editor UI mode: "+PixelFilterLocalization.Language);
+            text.AppendLine("Effective UI language: "+(PixelFilterLocalization.IsGerman ? "German" : "English"));
             text.AppendLine("Unity: "+Application.unityVersion);
             var package=UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(UniversalRenderPipelineAsset).Assembly);
             text.AppendLine("URP: "+(package?.version ?? "unknown"));
@@ -41,10 +43,10 @@ namespace PocketPixel.Editor
             return text.ToString();
         }
 
-        [MenuItem("Tools/Pixel Filter/Diagnosebericht speichern")]
+        [MenuItem("Tools/Pixel Filter/Save Diagnostic Report")]
         static void SaveReport()
         {
-            var path=EditorUtility.SaveFilePanel("Pixel Filter Diagnose","","PocketPixel-diagnostics","txt");
+            var path=EditorUtility.SaveFilePanel(PixelFilterLocalization.Text("Pixel Filter diagnostics", "Pixel Filter Diagnose"),"","PocketPixel-diagnostics","txt");
             if(!string.IsNullOrEmpty(path)) System.IO.File.WriteAllText(path,CreateReport());
         }
     }

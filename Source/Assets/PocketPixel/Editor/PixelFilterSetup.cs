@@ -16,7 +16,7 @@ namespace PocketPixel.Editor
             if (!EditorApplication.isPlayingOrWillChangePlaymode) Install(false);
         }
 
-        [MenuItem("Tools/Pixel Filter/Installieren oder reparieren")]
+        [MenuItem("Tools/Pixel Filter/Install or Repair")]
         public static void InstallMenu() => Install(true);
 
         public static int Install(bool report)
@@ -56,7 +56,9 @@ namespace PocketPixel.Editor
                 }
             }
             if(changed) AssetDatabase.SaveAssets();
-            if(report) Debug.Log(renderers.Count>0 ? $"Pixel Filter bereit: {renderers.Count} Renderer. Ziehe ein Pixel-Filter-Prefab in die Szene." : "Kein kompatibler Renderer gefunden. URP mit Universal Renderer erforderlich. Manuelle Einrichtung: Renderer-Asset > Add Renderer Feature > Pixel Filter Feature; Shader PocketPixel/Four Colour Camera zuweisen. Siehe TROUBLESHOOTING.md.");
+            if(report) Debug.Log(renderers.Count>0 ?
+                string.Format(PixelFilterLocalization.Text("Pixel Filter ready: {0} renderer(s). Add a Pixel Filter prefab to the scene.", "Pixel Filter bereit: {0} Renderer. Ziehe ein Pixel-Filter-Prefab in die Szene."), renderers.Count) :
+                PixelFilterLocalization.Text("No compatible renderer found. URP with a Universal Renderer is required. Manual setup: renderer asset > Add Renderer Feature > Pixel Filter Feature; assign the PocketPixel/Four Colour Camera shader. See TROUBLESHOOTING.md.", "Kein kompatibler Renderer gefunden. URP mit Universal Renderer erforderlich. Manuelle Einrichtung: Renderer-Asset > Add Renderer Feature > Pixel Filter Feature; Shader PocketPixel/Four Colour Camera zuweisen. Siehe TROUBLESHOOTING.md."));
             return renderers.Count;
         }
 

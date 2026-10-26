@@ -35,6 +35,20 @@ use Shader.Find with this name; changing it requires changing both callers. A se
 feature reference is required for build inclusion. Changing folder location is supported;
 there are no fixed Assets paths in runtime or installation code.
 
+## Editor language
+The Inspector stores Automatic / English / German in the per-user EditorPrefs key
+PocketPixel.Editor.Language. It is not a serialized component field.
+PixelFilterLocalization.cs owns text selection and language detection. Automatic
+reads UnityEditor.LocalizationDatabase.currentEditorLanguage only when editor
+localization is enabled. This type is internal to Unity; the small read-only adapter
+finds its properties at runtime, checks their types and falls back to English on
+missing APIs or getter failures. It does not use Application.systemLanguage, OS
+culture, private EditorPrefs keys or change Unity's language setting.
+Manual English/German overrides bypass the detector. Labels and palette names are
+display text only: the Palette enum values, serialized field names and GUIDs do not change.
+Menu paths stay English for documentation consistency; messages and dialogs are translated.
+No runtime localization package or assembly-definition changes are required.
+
 ## Behavioral invariants
 - No active scene component = no queued filter pass, not merely a transparent pass.
 - Disabling/destroying/unloading removes an instance from the registry.

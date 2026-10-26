@@ -37,8 +37,13 @@ Falls beim Ziehen der Datei kein Importfenster erscheint: **Assets > Import Pack
 Die komplette ZIP enthält zusätzlich Quellcode, Vorschauen und Dokumentation; für die Installation des Unity-Pakets wird sie nicht benötigt.
 
 Alternativ erzeugt **GameObject > Effects > Pixel Filter** ein Filterobjekt und prüft die Renderer-Einbindung.
-Falls kein Effekt erscheint, ausserhalb des Play Modes **Tools > Pixel Filter > Installieren oder reparieren** ausführen.
+Falls kein Effekt erscheint, ausserhalb des Play Modes **Tools > Pixel Filter > Install or Repair** ausführen.
 Die Einrichtung verändert nur Universal-Renderer-Assets, die von den URP-Assets in Graphics und Quality Settings verwendet werden.
+
+Das Auswahlfeld **Language / Sprache** oben im Pixel-Filter-Inspector bietet **Automatic / Automatisch**, **English** und **Deutsch**.
+Die Automatik folgt der Unity-Editorsprache, sofern sie ausgelesen werden kann; bei nicht übersetzten oder nicht verfügbaren Sprachen wird Englisch verwendet.
+Die Auswahl wird pro Benutzer gespeichert und verändert keine Szenen- oder Prefab-Einstellungen. Regler, Farbvorlagen, Hilfetexte und Buttons werden übersetzt.
+Die Menüpfade bleiben in beiden Sprachen Englisch. Diagnoseberichte verwenden für vergleichbare Fehlermeldungen Englisch.
 
 ## Verhalten wie ein globales Post-Process-Volume
 

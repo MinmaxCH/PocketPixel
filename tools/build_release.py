@@ -64,7 +64,7 @@ def build():
     names = list(DOCS) + [PACKAGE]
     names += [p.relative_to(ROOT).as_posix() for directory in ("Source", "Previews")
               for p in (ROOT / directory).rglob("*") if p.is_file()]
-    names += ["tools/build_release.py", "tools/check_release.py"]
+    names += ["tools/build_release.py", "tools/check_release.py", "tools/test_editor_language.py", "tests/EditorLanguageTests.cs"]
     with zipfile.ZipFile(ROOT / ARCHIVE, "w", zipfile.ZIP_DEFLATED) as output:
         for name in sorted(names):
             info = zipfile.ZipInfo(f"{VERSION}/{name}")
