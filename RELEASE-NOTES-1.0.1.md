@@ -13,4 +13,4 @@ Download **PocketPixel-1.0.1.unitypackage** for installation. Drag it into Unity
 
 The live demo is hosted separately on minmax.ch. Its scene, player controller, menu, Web build and Joomla integration are not included in the filter downloads.
 
-The existing custom attribution licence applies unchanged; see the included licence for the required credit and complete terms. The separate demo checks and remaining validation gaps are documented in [VALIDATION.md](https://github.com/MinmaxCH/PocketPixel/blob/main/VALIDATION.md).
+The existing custom attribution licence applies unchanged; see the included licence for the required credit and complete terms.
