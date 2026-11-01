@@ -5,8 +5,7 @@
 A global four-colour pixel filter for Unity 6 URP 3D, using the Universal Renderer.
 
 Development environment: Unity 6000.4.0f1, URP 17.4.0, Universal Renderer, Windows/DX12 Editor.
-The Built-in Render Pipeline, HDRP and URP 2D Renderer are not supported. Other Unity/URP versions have not been tested. See [validation status](VALIDATION.md) for the separate demo-build checks and remaining gaps.
-
+The Built-in Render Pipeline, HDRP and URP 2D Renderer are not supported. Other Unity/URP versions have not been tested.
 ## Previews
 
 | Warm yellow | Ice blue |
