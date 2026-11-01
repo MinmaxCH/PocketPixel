@@ -1,0 +1,54 @@
+name: Publish PocketPixel 1.0.1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pocketpixel-release-1.0.1
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the selected commit
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Check package contents and reproducible builds
+        run: python3 tools/check_release.py
+      - name: Verify checksums and committed downloads
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum --check SHA256SUMS
+          git diff --exit-code
+      - name: Create release with the filter downloads
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh api "repos/$GH_REPO/git/ref/tags/v1.0.1" --silent 2>/dev/null; then
+            tagged_commit=$(gh api "repos/$GH_REPO/commits/v1.0.1" --jq .sha)
+            if [ "$tagged_commit" != "$RELEASE_COMMIT" ]; then
+              echo "The existing v1.0.1 tag points to a different commit. No release was created."
+              exit 1
+            fi
+          fi
+          gh release create v1.0.1 \
+            PocketPixel-1.0.1.unitypackage \
+            PocketPixel-1.0.1-komplett.zip \
+            SHA256SUMS \
+            --target "$RELEASE_COMMIT" \
+            --title "PocketPixel 1.0.1" \
+            --notes-file RELEASE-NOTES-1.0.1.md

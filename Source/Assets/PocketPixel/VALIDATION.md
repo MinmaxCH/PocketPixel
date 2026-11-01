@@ -31,10 +31,22 @@ These reports have been preserved as supplied. They were not rerun during this E
 - Local Markdown links, download filenames, package GUIDs and prefab script references are checked.
 - ZIP and Unity package output can be reproduced with the standard-library scripts in tools/.
 
+## Separate demo-build checks — 2026-11-01
+
+- The author reported that the Windows demo worked with Build And Run, including its demo menu. This is a user-confirmed demo result, not an independently repeated desktop-player test.
+- The supplied Unity Web build identified Unity 6000.4.0f1 and was exercised locally in headless Chromium using software WebGL 2 rendering.
+- The scene and PocketPixel effect were visible. The demo F menu, palette changes, filter on/off, pixel-height and exposure changes were exercised.
+- The website wrapper was run with PHP 8.3 and the original supplied build files. Its asset responses used the expected MIME and Brotli headers.
+- Browser checks of the generated article embed covered 16:9 sizing at 1600, 900 and 390-pixel viewport widths, starting only after a click, removing the engine iframe when the project area was hidden, and no automatic restart after showing it again.
+
+The software-rendered browser run logged unsupported URP helper/debug shaders and an FSR upscaling warning. The filter itself rendered visibly; these results do not establish warning-free WebGL compatibility across browsers and GPUs.
+
+These checks concern the separate demo. The demo scene, player controller, menu, Web build and Joomla integration are not included in this filter package. They do not replace a fresh-project import and Inspector check of the current Unity package.
+
 ## Not independently verified in this refresh
 
-A Unity Editor is not available in the preparation environment. In-Editor compilation, Inspector rendering,
-Play Mode lifecycle, performance and a standalone player build have not been rerun here.
+A Unity Editor is not available in the preparation environment. A fresh-project import, in-Editor compilation, Inspector rendering,
+Editor Play Mode lifecycle and desktop-player performance have not been independently rerun here.
 A build-target value in TEST-ENVIRONMENT.txt identifies the selected target; it is not evidence
 that a player was built and tested. Other GPUs/platforms, XR, HDR output and dynamic resolution
 remain unverified.

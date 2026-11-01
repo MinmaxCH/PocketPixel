@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 release documentation — 2026-11-01
+- Linked the externally hosted live demo from both language READMEs.
+- Recorded the author-confirmed Windows demo and locally exercised Web demo, including their validation limits and browser warnings.
+- Kept the demo scene, player controller, menu, Web build and Joomla integration outside the filter download.
+- Rebuilt documentation-containing downloads; rendering code, shaders, prefab settings, GUIDs and licence files are unchanged.
+
 ## 1.0.1 Editor language update — 2026-10-27
 - Added per-user Automatic / English / Deutsch selection in the Pixel Filter Inspector.
 - Localized Inspector labels, palette display names, help text, tooltips, buttons and installer messages.

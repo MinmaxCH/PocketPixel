@@ -4,7 +4,13 @@
 
 Globaler Vierfarben-Pixelfilter für Unity 6 URP 3D mit dem Universal Renderer.
 Entwicklungsumgebung: Unity 6000.4.0f1, URP 17.4.0, Universal Renderer, Windows-/DX12-Editor.
-Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Versionen und eigenständige Player-Builds sind nicht verifiziert. Siehe [Prüfstand](VALIDATION.md).
+Built-in, HDRP und URP 2D Renderer werden nicht unterstützt. Andere Unity-/URP-Versionen wurden nicht getestet. Siehe [Prüfstand](VALIDATION.md) für die separaten Demo-Build-Tests und die noch offenen Prüfungen.
+
+## Live-Demo
+
+**[PocketPixel direkt im Browser ausprobieren](https://minmax.ch/demos/pocketpixel/pocketpixel-demo.php)**
+
+Die Demo läuft auf minmax.ch. Ihre Szene, Spielersteuerung und ihr Menü sind separat und nicht im Unity-Download enthalten.
 
 ## Installation
 
